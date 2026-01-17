@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
 import os
-import shutil
 from datetime import datetime
-from pathlib import Path
 
 app = Flask(__name__)
 
@@ -212,12 +210,10 @@ if __name__ == '__main__':
     import socket
     hostname = socket.gethostname()
     local_ip = socket.gethostbyname(hostname)
-
     print(f"\n{'='*50}")
     print(f"  LAN Transfer Server Started")
     print(f"{'='*50}")
     print(f"  Local:    http://localhost:5000")
     print(f"  Network:  http://{local_ip}:5000")
     print(f"{'='*50}\n")
-
     app.run(host='0.0.0.0', port=5000, debug=False)
