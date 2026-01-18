@@ -32,7 +32,7 @@ FILE_CATEGORIES = {
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500MB 最大文件
 
-# 消息存储（内存中）
+# 消息存储
 messages = []
 MAX_MESSAGES = 100
 
@@ -206,7 +206,6 @@ def get_stats():
 
 
 if __name__ == '__main__':
-    # 获取本机局域网IP
     import socket
     hostname = socket.gethostname()
     local_ip = socket.gethostbyname(hostname)
