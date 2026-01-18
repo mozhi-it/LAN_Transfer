@@ -10,8 +10,6 @@ else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__, template_folder=os.path.join(BASE_DIR, 'templates'))
-
-# 配置静态文件路径（PyInstaller 打包支持）
 app.static_folder = os.path.join(BASE_DIR, 'static')
 app.static_url_path = '/static'
 
