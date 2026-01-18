@@ -353,6 +353,7 @@ body {
 .chat-messages {
     flex: 1;
     overflow-y: auto;
+    max-height: 500px;
     padding: 16px;
     display: flex;
     flex-direction: column;
