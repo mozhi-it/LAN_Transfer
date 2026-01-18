@@ -1,8 +1,19 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
+import sys
 import os
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from datetime import datetime
 
-app = Flask(__name__)
+# PyInstaller 打包支持
+if getattr(sys, 'frozen', False):
+    BASE_DIR = sys._MEIPASS
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(__name__, template_folder=os.path.join(BASE_DIR, 'templates'))
+
+# 配置静态文件路径（PyInstaller 打包支持）
+app.static_folder = os.path.join(BASE_DIR, 'static')
+app.static_url_path = '/static'
 
 # 配置
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
@@ -207,12 +218,17 @@ def get_stats():
 
 if __name__ == '__main__':
     import socket
+
+    # 获取端口号
+    port_input = input("请输入端口号 (默认 5000): ").strip()
+    port = int(port_input) if port_input else 5000
+
     hostname = socket.gethostname()
     local_ip = socket.gethostbyname(hostname)
+
     print(f"\n{'='*50}")
     print(f"  LAN Transfer Server Started")
     print(f"{'='*50}")
-    print(f"  Local:    http://localhost:5000")
-    print(f"  Network:  http://{local_ip}:5000")
+    print(f"  Network:  http://{local_ip}:{port}")
     print(f"{'='*50}\n")
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)
