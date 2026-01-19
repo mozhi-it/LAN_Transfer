@@ -7,7 +7,10 @@ import ctypes.wintypes
 from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QVBoxLayout, QLabel, QPushButton, QMessageBox
 from PyQt5.QtCore import Qt
 
-from .browser_window import BrowserWindow
+try:
+    from .browser_window import BrowserWindow
+except ImportError:
+    from browser_window import BrowserWindow
 
 
 # Windows API常量
